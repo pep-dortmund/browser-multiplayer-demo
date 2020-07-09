@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;:w
+}
+
+#app {
+  box-sizing: border-box;
+  padding: 10pt;
+  width: 100%;
+  height: 100%;
+}
+
+#connect4 {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
