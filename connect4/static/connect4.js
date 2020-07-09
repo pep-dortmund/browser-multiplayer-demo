@@ -1,6 +1,9 @@
 'use strict'
 
 let socket = io();
+let urlParams = new URLSearchParams(window.location.search);
+const GAME_ID = urlParams.get('game_id')
+
 let state
 let canvas
 let ctx
@@ -143,25 +146,24 @@ window.onload = function(event) {
     state = new_state
     draw()
   })
+  socket.emit('join', {game_id: GAME_ID})
 
   canvas.addEventListener('mousemove', (event) => {
-    state.mousePos = mouse2canvas(event, canvas)
-    draw()
+    if (state) {
+      state.mousePos = mouse2canvas(event, canvas)
+      draw()
+    }
   })
 
   canvas.addEventListener('click', function(event) {
-
-    // restart game on click if we have a winner
-    if (state.winner != null) {
-      socket.emit('reset')
-    } else {
+    // only do something if game is not yet finished
+    if (state.winner == null) {
       let mousePos = mouse2canvas(event)
       let [row, col] = pix2grid(mousePos.x, mousePos.y)
 
       if (state.board[row][col] == 0) {
-        socket.emit('move', {player: state.player, col: col})
+        socket.emit('move', {game_id: GAME_ID, player: state.player, col: col})
       }
     }
   })
-
 }

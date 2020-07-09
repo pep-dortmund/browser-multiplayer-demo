@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Connect4</title>
     <link rel="stylesheet" href="/static/style.css" type="text/css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA==" crossorigin="anonymous"></script>
-    <script defer src="/static/connect4.js" charset="utf-8"></script>
-
   </head>
   <body>
-    <div id="app">
-      <canvas id="connect4" width="700" height="600"></canvas>
-    </div>
+    <main>
+      <form action="/game" method="post">
+        <input type="submit" name="submit" id="submit" value="New Game" />
+      </form>
+
+      <form action="/game" method="get">
+        <input type="number" name="game_id" id="game_id" value="0" step="1" minmin="0" />
+        <button type="submit" >Join existing</button>
+      </form>
+    </main>
   </body>
 </html>

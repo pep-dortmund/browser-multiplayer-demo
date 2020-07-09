@@ -1,4 +1,4 @@
-from . import app, socket
+from . import app, socketio
 
 
-socket.run(app)
+socketio.run(app)
