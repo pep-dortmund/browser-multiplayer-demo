@@ -37,7 +37,6 @@ def reset():
 
 @socket.on('move')
 def on_move(json):
-    print("Received move:", json)
     if json['player'] != state['player']:
         return False
 
