@@ -1,0 +1,3 @@
+# generate truly random key here, e.g. by doing
+# head -c 16 /dev/urandom | hexdump
+export CONNECT4_SECRET
