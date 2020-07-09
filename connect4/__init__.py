@@ -33,13 +33,6 @@ def game():
     return render_template('game.html')
 
 
-@app.route('/game/<int:game_id>')
-def get_state(game_id):
-    if id >= len(games) or id < 0:
-        abort(404)
-    return jsonify(games[game_id])
-
-
 @socketio.on('connect')
 def on_connect():
     # emit only sends to the client that made the request
