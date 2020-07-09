@@ -172,7 +172,7 @@ function draw(canvas, ctx, state) {
     }
   }
 
-  if (state.mousePos != null) {
+  if (state.mousePos != null && state.winner === null) {
     let [row, col] = pix2grid(state.mousePos.x, state.mousePos.y, scale)
 
     if (!(row < 0 || row >= N_ROWS || col < 0 || col >= N_COLS)) {
