@@ -7,15 +7,24 @@
     <link rel="stylesheet" href="/static/style.css" type="text/css">
   </head>
   <body>
-    <main>
+    <header class="container">
+      <h1>Connect4</h1>
+      <p>Multiplayer Demo using HTML canvas / websockets / Flask.</p>
+    </header>
+
+    <main class="container">
       <form action="/game" method="post">
         <input type="submit" name="submit" id="submit" value="New Game" />
       </form>
 
       <form action="/game" method="get">
-        <input type="number" name="game_id" id="game_id" value="0" step="1" minmin="0" />
-        <button type="submit" >Join existing</button>
+        <input type="text" placeholder="Game Token" name="token" id="token"/>
+        <button type="submit">Join existing</button>
       </form>
+
     </main>
+    <footer>
+      <a href="https://github.com/pep-dortmund/browser-multiplayer-demo">Code on Github</a>
+    </footer>
   </body>
 </html>

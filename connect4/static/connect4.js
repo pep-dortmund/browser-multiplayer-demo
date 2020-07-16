@@ -2,7 +2,7 @@
 
 let socket = io();
 let urlParams = new URLSearchParams(window.location.search);
-const GAME_ID = urlParams.get('game_id')
+const TOKEN = document.location.pathname.split('/').pop()
 
 let state
 let canvas
@@ -146,7 +146,7 @@ window.onload = function(event) {
     state = new_state
     draw()
   })
-  socket.emit('join', {game_id: GAME_ID})
+  socket.emit('join', {token: TOKEN})
 
   canvas.addEventListener('mousemove', (event) => {
     if (state) {
@@ -162,7 +162,7 @@ window.onload = function(event) {
       let [row, col] = pix2grid(mousePos.x, mousePos.y)
 
       if (state.board[row][col] == 0) {
-        socket.emit('move', {game_id: GAME_ID, player: state.player, col: col})
+        socket.emit('move', {token: TOKEN, player: state.player, col: col})
       }
     }
   })

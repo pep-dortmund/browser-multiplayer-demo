@@ -1,11 +1,27 @@
-* {
+html, body {
   margin: 0;
   padding: 0;
 }
 
 body {
   height: 100vh;
-  width: 100vw;:w
+  width: 100vw;
+  font-family: "Fira Sans", sans-serif;
+}
+
+main {
+  width: max-content;
+}
+
+.container {
+  padding: 1rem;  
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header, footer {
+  text-align: center;
+  padding: 1rem;
 }
 
 #app {

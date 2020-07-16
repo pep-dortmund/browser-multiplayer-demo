@@ -11,7 +11,17 @@
   </head>
   <body>
     <div id="app">
+      <header>
+        <h1>Connect4</h1>
+        <h3>Game ID: <code>{{ token }}</code></h3>
+      </header>
       <canvas id="connect4" width="700" height="600"></canvas>
+      <footer>
+        <form action="/game" method="post">
+          <input type="submit" name="submit" id="submit" value="New Game" />
+        </form>
+      </footer>
     </div>
+
   </body>
 </html>
