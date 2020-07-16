@@ -1,16 +1,21 @@
+import eventlet
+eventlet.monkey_patch()  # noqa
+
 import os
+import secrets
+
 from flask import Flask, render_template, abort, redirect, url_for, request
 from flask_socketio import SocketIO, emit, join_room
 from dotenv import load_dotenv
-import secrets
 
 from .connect4 import init_state, check_victory
+
 
 load_dotenv()
 
 app = Flask(__name__)
 app.config['secret'] = os.environ['CONNECT4_SECRET']
-socketio = SocketIO(app, cookie=False)
+socketio = SocketIO(app, cookie=False, cors_allowed_origins="*")
 
 games = {}
 

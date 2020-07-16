@@ -1,9 +1,8 @@
 'use strict'
 
-let socket = io();
-let urlParams = new URLSearchParams(window.location.search);
 const TOKEN = document.location.pathname.split('/').pop()
 
+let socket
 let state
 let canvas
 let ctx
@@ -139,6 +138,8 @@ function mouse2canvas(event) {
 }
 
 window.onload = function(event) {
+  socket = io.connect('/')
+  socket.onconnect(() => {console.log("connected")})
   canvas = document.getElementById('connect4')
   ctx = canvas.getContext('2d')
 
