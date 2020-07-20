@@ -1,3 +1,3 @@
 # generate truly random key here, e.g. by doing
-# head -c 16 /dev/urandom | hexdump
+# python -c 'import secrets; print(secrets.hex_token(16)'
 export CONNECT4_SECRET
