@@ -195,11 +195,11 @@ function onStateChange(new_state) {
 // is top left of the canvas.
 // width and height do not match the actual size (e.g. the canvas is stretched),
 // they need to be scaled.
-function mouse2canvas(event) {
+function mouse2canvas(e) {
   let bbox = canvas.getBoundingClientRect()
   return {
-    x: (event.clientX - bbox.left) * canvas.width / bbox.width,
-    y: (event.clientY - bbox.top) * canvas.height / bbox.height
+    x: (e.clientX - bbox.left) * canvas.width / bbox.width,
+    y: (e.clientY - bbox.top) * canvas.height / bbox.height
   }
 }
 
@@ -233,6 +233,19 @@ function onClick(event) {
   }
 }
 
+function onChat(message) {
+  // create a new paragraph with text "message"
+  let new_message = document.createElement('p')
+  let text = document.createTextNode(message)
+  new_message.appendChild(text)
+
+  // add it to the bottom of the chat window
+  let chat = document.getElementById('messages')
+  chat.appendChild(new_message)
+  // scroll to bottom
+  chat.scrollTop = chat.scrollHeight
+}
+
 
 // To make sure, the page is already loaded and we can access
 // all elements, we only run the main code once the page is fully
@@ -245,6 +258,9 @@ window.onload = function(event) {
   // create the websocket object and open the connection
   socket = io.connect('/')
   socket.on('state_change', (new_state) => {
+    if (state) {
+      new_state.mousePos = state.mousePos
+    }
     state = new_state
     draw()
   })
@@ -258,25 +274,11 @@ window.onload = function(event) {
       input.value = ""
     })
 
-  socket.on('chat', (message) => {
-    // create a new paragraph with text "message"
-    let new_message = document.createElement('p')
-    let text = document.createTextNode(message)
-    new_message.appendChild(text)
-
-    // add it to the bottom of the chat window
-    let chat = document.getElementById('messages')
-    chat.appendChild(new_message)
-    // scroll to bottom
-    chat.scrollTop = chat.scrollHeight
-  })
-
-  socket.emit('join', {token: TOKEN})
 
   // register our functions for the corresponding event types on the socket
   socket.onconnect(() => {console.log("connected")})
   socket.on('state_change', onStateChange)
-
+  socket.on('chat', onChat)
   // Join the game channel, receives current game in ack callback
   socket.emit('join', {token: TOKEN}, (new_state) => {state = new_state; draw()})
 
