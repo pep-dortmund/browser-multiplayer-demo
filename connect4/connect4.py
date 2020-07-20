@@ -14,7 +14,12 @@ def init_state():
         'board': [[0 for _ in range(N_COLS)] for _ in range(N_ROWS)],
         'player': 1,
         'winner': None,
+        'finished': False,
     }
+
+
+def is_full(board):
+    return all(all(cell != 0 for cell in row) for row in board)
 
 
 def check_victory(board):

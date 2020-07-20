@@ -8,7 +8,7 @@ from flask import Flask, render_template, abort, redirect, url_for, request
 from flask_socketio import SocketIO, emit, join_room
 from dotenv import load_dotenv
 
-from .connect4 import init_state, check_victory
+from .connect4 import init_state, check_victory, is_full
 
 
 load_dotenv()
@@ -89,6 +89,7 @@ def on_move(data):
             row[col] = data['player']
             game['player'] = 2 if game['player'] == 1 else 1
             game['winner'] = check_victory(game['board'])
+            game['finished'] = is_full(game['board']) or game['winner'] is not None
             socketio.emit('state_change', game, room=token)
             break
 

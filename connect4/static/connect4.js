@@ -149,7 +149,7 @@ function draw() {
 
   // draw a new stone at the mouse position only if the game
   // is not yet finished
-  if (state.mousePos != null && state.winner === null) {
+  if (state.mousePos != null && !state.finished) {
     let [row, col] = pix2grid(state.mousePos.x, state.mousePos.y)
 
     // check that mouse is inside board
