@@ -15,7 +15,19 @@
         <h1>Connect4</h1>
         <h3>Game ID: <code>{{ token }}</code></h3>
       </header>
+
+      
       <canvas id="connect4" width="700" height="600"></canvas>
+
+      <div id="chat">
+        <div id="messages"></div>
+
+        <form id="chatform">
+          <input type="text" name="message" id="message" placeholder="Send message..."/>
+          <button type="submit" id="send">Send</button>
+        </form>
+      </div>
+
       <footer>
         <form action="/game" method="post">
           <input type="submit" name="submit" id="submit" value="New Game" />

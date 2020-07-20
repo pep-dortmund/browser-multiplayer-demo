@@ -59,6 +59,13 @@ def on_connect():
     # emit('state_change', state)
 
 
+@socketio.on('chat')
+def on_chat(text):
+    print(request.sid, request.namespace)
+    print('disconnect')
+    socketio.emit('chat', text, broadcast=True)
+
+
 @socketio.on('join')
 def on_join(data):
     token = data['token']

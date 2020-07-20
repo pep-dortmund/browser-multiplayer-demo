@@ -244,6 +244,34 @@ window.onload = function(event) {
 
   // create the websocket object and open the connection
   socket = io.connect('/')
+  socket.on('state_change', (new_state) => {
+    state = new_state
+    draw()
+  })
+
+  // chat related stuff
+  document.getElementById('chatform').addEventListener('submit', (e) => {
+      e.preventDefault() // make sure the form is not submitted normally
+      let input = document.getElementById('message')
+      let message = input.value
+      socket.emit('chat', message)
+      input.value = ""
+    })
+
+  socket.on('chat', (message) => {
+    // create a new paragraph with text "message"
+    let new_message = document.createElement('p')
+    let text = document.createTextNode(message)
+    new_message.appendChild(text)
+
+    // add it to the bottom of the chat window
+    let chat = document.getElementById('messages')
+    chat.appendChild(new_message)
+    // scroll to bottom
+    chat.scrollTop = chat.scrollHeight
+  })
+
+  socket.emit('join', {token: TOKEN})
 
   // register our functions for the corresponding event types on the socket
   socket.onconnect(() => {console.log("connected")})

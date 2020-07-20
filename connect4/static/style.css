@@ -38,3 +38,33 @@ header, footer {
   max-height: 100%;
   margin: auto;
 }
+
+#chat {
+  display: block;
+  width: 80%;
+  max-width: 40rem;
+  margin: auto;
+  margin-top: 10pt;
+}
+
+#messages {
+  border: 3px solid DarkBlue;
+  height: 4.5rem;
+  overflow-y: scroll;
+  padding: 5pt;
+  margin-bottom: 5pt;
+}
+
+#messages p {
+  margin-top: 0.1rem;
+  margin-bottom: 0rem;
+}
+
+#message {
+  width: 85%;
+}
+
+#send {
+  float: right;
+  width: 10%;
+}
