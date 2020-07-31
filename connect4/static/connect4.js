@@ -1,7 +1,12 @@
 'use strict'
 
 const TOKEN = document.location.pathname.split('/').pop()
+const SOUNDS = {
+  'new_stone': new Audio('/static/sounds/new_stone.mp3'),
+  'win': new Audio('/static/sounds/win.mp3'),
+}
 
+// global variables, to be set in onload
 let socket
 let state
 let canvas
@@ -20,6 +25,12 @@ const COLORS = {
   0: "white",
   1: "crimson",
   2: "#ffcc00"
+}
+
+
+function playSound(sound) {
+  SOUNDS[sound].currentTime = 0
+  SOUNDS[sound].play()
 }
 
 function calcScale() {
@@ -144,8 +155,12 @@ window.onload = function(event) {
   ctx = canvas.getContext('2d')
 
   socket.on('state_change', (new_state) => {
+    playSound('new_stone')
     state = new_state
     draw()
+    if (state.winner !== null) {
+      playSound('win')
+    }
   })
   socket.emit('join', {token: TOKEN})
 
