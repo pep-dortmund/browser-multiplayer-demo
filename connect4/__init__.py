@@ -53,10 +53,10 @@ def show_game(token):
 
 @socketio.on('connect')
 def on_connect():
+    '''Get's called when a new client connects to the socket'''
     # emit only sends to the client that made the request
     # socketio.emit sends to all clients
     # emit('state_change', state)
-    print('new connction')
 
 
 @socketio.on('join')
