@@ -66,7 +66,9 @@ def on_join(data):
         return
 
     join_room(token)
-    emit('state_change', games[token], room=token)
+    # returned data gets send to the ack callback on the client side
+    # here we return the current state of the game to the newly joined player
+    return games[token]
 
 
 @socketio.on('move')
