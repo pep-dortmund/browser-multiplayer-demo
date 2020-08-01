@@ -14,6 +14,30 @@ This example project, to simplify the game logic but still show
 all the needed technologies, implements connect4.
 
 
+## Basics / Terminology
+
+
+Web development is split into two main parts: Server and Client.
+
+Client-side covers everything happening on the machine of a visitor.
+This includes the initial request, parsing of the received HTML code,
+rendering the document using the style defined in CSS and executing the
+JavaScript code if any.
+
+The server-side is what answers requests by the client, sending files or
+dynamically created content.
+The server tracks state, e.g. by storing it in files or using a database or
+just some in-memory object.
+
+Traditionally, exchange of information is always initiated by the Client.
+The client sends a request, the server answers.
+This has some limitations, especially for multiplayer games, since the server
+needs to communicate between multiple clients.
+E.g. it needs to send Bob new information when Alice has made a move.
+
+Here, we are going to use websockets, a communication standard that allows
+bi-directional communication initiated by either client or server.
+
 ## Overview
 
 Developing something for the web always needs multiple technologies,
@@ -59,6 +83,7 @@ More Material will be needed to program another functional game.
 * [flask-socketio](https://flask-socketio.readthedocs.io/en/latest/)
 * [python-dotenv](https://pypi.org/project/python-dotenv/)
 * [secrets (python std lib)](https://docs.python.org/3/library/secrets.html)
+* [poetry (Python dependency management)](https://python-poetry.org/docs/)
 
 
 ### Mozilla Developer Network
@@ -82,4 +107,3 @@ Tutorials on exactly what we are trying to do here (only using NodeJS on the ser
 
 * <https://youtu.be/xVcVbCLmKew>
 * <https://youtu.be/PfSwUOBL1YQ>
-
