@@ -1,7 +1,5 @@
 "use strict;"
-let color = "red"
 let draw = false
-let size = 5
 
 
 function mouse2canvas(ctx, e) {
@@ -12,14 +10,14 @@ function mouse2canvas(ctx, e) {
   }
 }
 
-function drawCircle(ctx, pos) {
+function drawCircle(ctx, pos, color, size) {
   ctx.beginPath()
   ctx.fillStyle = color
   ctx.arc(pos.x, pos.y, 0.5 * size, 0, 2 * Math.PI)
   ctx.fill()
 }
 
-function startLine(ctx, pos) {
+function startLine(ctx, pos, color, size) {
     ctx.beginPath()
     ctx.moveTo(pos.x, pos.y)
     ctx.strokeStyle = color
@@ -36,21 +34,14 @@ window.onload = () => {
   let canvas = document.getElementById('canvas')
   let ctx = canvas.getContext("2d")
 
-  let colorPicker = document.getElementById("color")
-  colorPicker.onchange = (e) => {
-    color = colorPicker.value
-  }
-
-  let sizePicker = document.getElementById("size")
-  sizePicker.onchange = (e) => {
-    size = sizePicker.value
-  }
+  let color = document.getElementById("color")
+  let size = document.getElementById("size")
 
   canvas.onmousedown = (e) => {
     draw = true
     let pos = mouse2canvas(ctx, e)
-    drawCircle(ctx, pos)
-    startLine(ctx, pos)
+    drawCircle(ctx, pos, color.value, size.value)
+    startLine(ctx, pos, color.value, size.value)
   }
 
   canvas.onmouseup = (e) => {
@@ -63,8 +54,8 @@ window.onload = () => {
     if (draw) {
       pos = mouse2canvas(ctx, e)
       finishLine(ctx, pos)
-      drawCircle(ctx, pos)
-      startLine(ctx, pos)
+      drawCircle(ctx, pos, color.value, size.value)
+      startLine(ctx, pos, color.value, size.value)
     }
   }
 }
