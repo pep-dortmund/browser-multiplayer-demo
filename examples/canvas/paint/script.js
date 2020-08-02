@@ -37,6 +37,12 @@ window.onload = () => {
   let color = document.getElementById("color")
   let size = document.getElementById("size")
 
+  // clear canvas on reset button click
+  document.getElementById("reset").onclick = () => {
+    ctx.fillStyle = "white"
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+  }
+
   canvas.onmousedown = (e) => {
     draw = true
     let pos = mouse2canvas(ctx, e)
