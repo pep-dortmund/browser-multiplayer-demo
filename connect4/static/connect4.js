@@ -70,9 +70,10 @@ function grid2pix(row, col) {
  * player sets the color 0=empty, 1 = first player, 2 = second player
  */
 function drawCircle(row, col, player) {
+  const [x, y] = grid2pix(row, col)
   let scale = calcScale()
+
   ctx.beginPath()
-  const [x, y] = grid2pix(row, col, scale)
   ctx.arc(
     x, y, 0.45 * scale, 0, 2 * Math.PI,
   )
@@ -84,9 +85,10 @@ function drawCircle(row, col, player) {
  * Add a gray circle around a hole for marking the four victory stones
  */
 function markCircle(row, col) {
+  const [x, y] = grid2pix(row, col)
   let scale = calcScale()
+
   ctx.beginPath()
-  const [x, y] = grid2pix(row, col, scale)
   ctx.arc(
     x, y, 0.45 * scale, 0, 2 * Math.PI,
   )
@@ -120,7 +122,7 @@ function drawCross(row, col) {
 
 /**
  * This is the main function.
- * From the current game state, draw the everything on the canvas
+ * From the current game state, draw everything on the canvas
  * needed to get the board.
  *
  * Start with the background rectangle, the stones already set,
@@ -131,7 +133,6 @@ function drawCross(row, col) {
 function draw() {
   let n_rows = state.board.length
   let n_cols = state.board[0].length
-  let scale = calcScale()
 
   // draw the background rectangle
   ctx.beginPath()
@@ -149,9 +150,11 @@ function draw() {
   // draw a new stone at the mouse position only if the game
   // is not yet finished
   if (state.mousePos != null && state.winner === null) {
-    let [row, col] = pix2grid(state.mousePos.x, state.mousePos.y, scale)
+    let [row, col] = pix2grid(state.mousePos.x, state.mousePos.y)
 
+    // check that mouse is inside board
     if (!(row < 0 || row >= n_rows || col < 0 || col >= n_cols)) {
+      // check that hole is still available
       if (state.board[row][col] == 0) {
         drawCircle(row, col, state.player)
       } else {
@@ -176,19 +179,20 @@ function draw() {
 }
 
 function onStateChange(new_state) {
-    playSound('new_stone')
-    state = new_state
+  playSound('new_stone')
+  state = new_state
 
-    draw()
+  draw()
 
-    if (state.winner !== null) {
-      playSound('win')
-    }
+  if (state.winner !== null) {
+    playSound('win')
+  }
 }
 
 // convert the coordinates of a mouse event (real pixels on the display)
 // to canvas coordinates (relative to the width and height properties of the canvas)
-// both coordinates have the origin in the top left corner, but if the
+// Origin of mouse coordinates is top left of the display, origin of canvas coordinates
+// is top left of the canvas.
 // width and height do not match the actual size (e.g. the canvas is stretched),
 // they need to be scaled.
 function mouse2canvas(event) {
