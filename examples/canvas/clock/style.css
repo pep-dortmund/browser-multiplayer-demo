@@ -1,0 +1,10 @@
+#canvas {
+  display: block;
+  border: 3px solid;
+  max-width: 100%;
+  width: auto;
+  max-height: 90vh;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
