@@ -233,10 +233,10 @@ function onClick(event) {
   }
 }
 
-function onChat(message) {
+function onChat(data) {
   // create a new paragraph with text "message"
   let new_message = document.createElement('p')
-  let text = document.createTextNode(message)
+  let text = document.createTextNode(data.name + ': ' + data.message)
   new_message.appendChild(text)
 
   // add it to the bottom of the chat window
@@ -268,9 +268,9 @@ window.onload = function(event) {
   // chat related stuff
   document.getElementById('chatform').addEventListener('submit', (e) => {
       e.preventDefault() // make sure the form is not submitted normally
-      let input = document.getElementById('message')
-      let message = input.value
-      socket.emit('chat', message)
+      let name = document.getElementById('name')
+      let message = document.getElementById('message')
+      socket.emit('chat', {'name': name.value, 'message': message.value})
       input.value = ""
     })
 

@@ -60,10 +60,9 @@ def on_connect():
 
 
 @socketio.on('chat')
-def on_chat(text):
+def on_chat(json):
     print(request.sid, request.namespace)
-    print('disconnect')
-    socketio.emit('chat', text, broadcast=True)
+    socketio.emit('chat', json, broadcast=True)
 
 
 @socketio.on('join')
