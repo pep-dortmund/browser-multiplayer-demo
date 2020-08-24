@@ -85,7 +85,6 @@ More Material will be needed to program another functional game.
 * [secrets (python std lib)](https://docs.python.org/3/library/secrets.html)
 * [poetry (Python dependency management)](https://python-poetry.org/docs/)
 
-
 ### Mozilla Developer Network
 
 <https://developer.mozilla.org/en-US/>
@@ -99,6 +98,16 @@ Especially:
     and the [Canvas Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas)
 * The [Document Object Model (DOM) API](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
     for manipulating the HTML code of a webpage with JavaScript
+
+
+### The Flask Megatutorial
+
+Created by the flask-socketio author Miguel Grinberg, this gives an overview
+over nearly everything flask can do:
+
+<https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world>
+
+
 
 
 ### YouTube Tutorials
