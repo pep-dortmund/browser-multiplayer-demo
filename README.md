@@ -4,6 +4,39 @@ A small demo project for browser-based multiplayer board games.
 Written as tutorial material for a hackathon during the online-only SoAk 2020.
 
 
+## Running this (TL;DR)
+
+Install poetry if not already available:
+
+```bash
+pip install --user poetry
+```
+
+If you already use some kind of virtual env or your own python installation,
+omit the `--user` part, if using the system python, it is needed.
+
+Install dependencies
+
+```
+poetry install
+```
+
+
+Run the webserver (Production version)
+
+```
+poetry run gunicorn -k eventlet -b 0.0.0.0:5000 connect4:app
+```
+
+or debug version:
+
+```
+FLASK_DEBUG=true poetry run python -m connect4
+```
+
+And visit localhost:5000.
+
+
 ## Goals
 
 For this hackathon, we want to implement online multiplayer games,
@@ -106,8 +139,6 @@ Created by the flask-socketio author Miguel Grinberg, this gives an overview
 over nearly everything flask can do:
 
 <https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world>
-
-
 
 
 ### YouTube Tutorials
