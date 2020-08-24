@@ -271,7 +271,7 @@ window.onload = function(event) {
       let name = document.getElementById('name')
       let message = document.getElementById('message')
       socket.emit('chat', {name: name.value, message: message.value, token: TOKEN})
-      input.value = ""
+      message.value = ""
     })
 
 
