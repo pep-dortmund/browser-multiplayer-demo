@@ -13,7 +13,9 @@ let canvas
 let ctx
 
 const PADDING = 0.1
+const HOLE_RADIUS = 0.45
 const BOARD_COLOR = "DarkBlue"
+
 const DIRECTIONS = {
   'horizontal': [ 0, 1],
   'vertical':   [ 1, 0],
@@ -75,7 +77,7 @@ function drawCircle(row, col, player) {
 
   ctx.beginPath()
   ctx.arc(
-    x, y, 0.45 * scale, 0, 2 * Math.PI,
+    x, y, HOLE_RADIUS * scale, 0, 2 * Math.PI,
   )
   ctx.fillStyle = COLORS[player]
   ctx.fill()
