@@ -15,6 +15,7 @@ def init_state():
         'player': 1,
         'winner': None,
         'finished': False,
+        'chat': [],
     }
 
 

@@ -61,8 +61,9 @@ def on_connect():
 
 @socketio.on('chat')
 def on_chat(json):
-    print(request.sid, request.namespace)
-    socketio.emit('chat', json, broadcast=True)
+    token = json.pop('token')
+    games[token]['chat'].append(json)
+    socketio.emit('chat', json, broadcast=True, room=token)
 
 
 @socketio.on('join')

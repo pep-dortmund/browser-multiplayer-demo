@@ -270,7 +270,7 @@ window.onload = function(event) {
       e.preventDefault() // make sure the form is not submitted normally
       let name = document.getElementById('name')
       let message = document.getElementById('message')
-      socket.emit('chat', {'name': name.value, 'message': message.value})
+      socket.emit('chat', {name: name.value, message: message.value, token: TOKEN})
       input.value = ""
     })
 
@@ -280,7 +280,11 @@ window.onload = function(event) {
   socket.on('state_change', onStateChange)
   socket.on('chat', onChat)
   // Join the game channel, receives current game in ack callback
-  socket.emit('join', {token: TOKEN}, (new_state) => {state = new_state; draw()})
+  socket.emit('join', {token: TOKEN}, (new_state) => {
+    state = new_state
+    draw()
+    state.chat.forEach(onChat)
+  })
 
   // add game callbacks to the canvas
   canvas.addEventListener('mousemove', onMouseMove)
